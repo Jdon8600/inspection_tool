@@ -36,6 +36,7 @@ function Location() {
 
     const result = await response.json();
     console.log(result);
+    return result;
   };
 
   //Make call to back end to obtain location Node Names based on Location Filter
