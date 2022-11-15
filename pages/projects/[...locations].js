@@ -25,18 +25,24 @@ function Location() {
   const [list, setList] = useState([]);
 
   //declare State for items to update
+  const [hasCheckID, sethasCheckID] = useState(false);
   const [checkLists, setChecklists] = useState([]);
   const [checklistItems, setChecklistItems] = useState([]);
 
   const getChecklists = async () => {
-    const response = await fetch(`/api/checklist?project_id=${projectID}&checklists=${isCheck}`, {
-      method: "Get",
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `/api/checklist?project_id=${projectID}&checklists=${isCheck}`,
+      {
+        method: "Get",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     const result = await response.json();
     console.log(result);
-    return result;
+    sethasCheckID(!hasCheckID);
+    console.log(hasCheckID);
+    setChecklists(result);
   };
 
   //Make call to back end to obtain location Node Names based on Location Filter
@@ -85,21 +91,38 @@ function Location() {
     );
   });
   if (status === "authenticated") {
+    if (hasCheckID == false) {
+      return (
+        <div>
+          <Checkbox
+            type="checkbox"
+            name="selectAll"
+            id="selectAll"
+            handleClick={handleSelectAll}
+            isChecked={isCheckAll}
+          />
+          Select All
+          <br />
+          {catalog}
+          <div>
+            <Button onClick={getChecklists}>Submit</Button>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div>
-        <Checkbox
-          type="checkbox"
-          name="selectAll"
-          id="selectAll"
-          handleClick={handleSelectAll}
-          isChecked={isCheckAll}
-        />
-        Select All
-        <br />
-        {catalog}
-        <div>
-          <Button onClick={getChecklists}>Submit</Button>
-        </div>
+        <form>
+          <label htmlFor="pass">Pass</label>
+          <input type="text" name="pass"></input><br/><br/>
+          <label htmlFor="fail">Fail</label>
+          <input type="text" name="fail"></input><br/><br/>
+          <label htmlFor="n/a">N/A</label>
+          <input type="text" name="n/a"></input><br/><br/>
+          <Button value="submit">Submit</Button>
+        </form>
+        <Button onClick={()=> signOut()}>Sign Out</Button>
       </div>
     );
   }

@@ -8,17 +8,10 @@ export default async (req, res) => {
   });
   if (accessToken) {
     // Signed in
-    const { project_id, checklists } = req.query;
-    const items = checklists.split(",");
-    const loc_id = [];
-    for (let i = 0; i < items.length; i++) {
-      loc_id.push(+items[i]);
-    }
-    console.log(loc_id);
-    const url = `https://api.procore.com/rest/v1.0/projects/${project_id}/checklist/lists?company_id=10469&filters[location_id]=[${loc_id}]`
+    //const { project_id, checklists } = req.query;
+    const url = `https://api.procore.com/rest/v1.0/projects/431591/checklist/list_items?comany_id=10469&filters[list_id]=[10334481,10334493]`
     const response = await fetch(url, {
       method: "GET",
-      //params: {"filters[location_id]": loc_id},
       headers: {
         Authorization: "Bearer " + accessToken,
       },
@@ -27,15 +20,8 @@ export default async (req, res) => {
     const result = await response.json();
     console.log(result);
 
-
-    const filteredData = [];
-    for(let i in result) {
-        filteredData.push({
-          id: result[i].id,
-        });
-    }
     
-    res.status(200).json(filteredData);
+    res.status(200).json(result);
     } else {
     // Not Signed in
     res.status(401);
