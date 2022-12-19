@@ -25,7 +25,7 @@ export default async (req, res) => {
     });
 
     const result = await response.json();
-    console.log(result);
+
 
 
     const filteredData = [];

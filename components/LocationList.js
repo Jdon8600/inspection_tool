@@ -3,10 +3,9 @@ import {useState} from "react";
 function LocationList(props) {
   let items = [];
   const handleOnChange = (e) => {
-    let isChecked = e.target.checked;
+    
     let value = e.target.value;
     items.push(value);
-    console.log(items);
   };
 
   

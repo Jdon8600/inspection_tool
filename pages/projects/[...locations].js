@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { getSession, useSession, signOut, signIn } from "next-auth/react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Checkbox from "../../components/Checkbox";
 import Button from "../../components/ui/button";
 
@@ -26,24 +26,11 @@ function Location() {
 
   //declare State for items to update
   const [hasCheckID, sethasCheckID] = useState(false);
-  const [checkLists, setChecklists] = useState([]);
   const [checklistItems, setChecklistItems] = useState([]);
+  const updates = {};
 
-  const getChecklists = async () => {
-    const response = await fetch(
-      `/api/checklist?project_id=${projectID}&checklists=${isCheck}`,
-      {
-        method: "Get",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-
-    const result = await response.json();
-    console.log(result);
-    sethasCheckID(!hasCheckID);
-    console.log(hasCheckID);
-    setChecklists(result);
-  };
+  //Create ref for input fields
+  const refs = useRef([]);
 
   //Make call to back end to obtain location Node Names based on Location Filter
   useEffect(() => {
@@ -72,7 +59,38 @@ function Location() {
     }
   };
 
-  console.log(isCheck);
+  const submit = (e) => {
+    e.preventDefault();
+    for (let i = 0; i < refs.current.length; i++) {
+      if (refs.current[i].value != "") {
+        updates[refs.current[i].name] = {
+          id: [refs.current[i].id],
+          value: refs.current[i].value,
+        };
+      }
+    }
+    
+    console.log(updates);
+  };
+
+  const checkItemID = async () => {
+    const response1 = await fetch(
+      `/api/checklist?project_id=${projectID}&checklists=${isCheck}`,
+      {
+        method: "Get",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const result1 = await response1.json();
+    const checklists = result1;
+    const list_id = checklists.map((checklists) => checklists.id);
+    const response = await fetch(
+      `/api/checklistItems?project_id=${projectID}&list_id=${list_id}`
+    );
+    const result = await response.json();
+    sethasCheckID(!hasCheckID);
+    setChecklistItems(result);
+  };
 
   const catalog = list.map(({ id, name }) => {
     return (
@@ -90,6 +108,7 @@ function Location() {
       </ul>
     );
   });
+
   if (status === "authenticated") {
     if (hasCheckID == false) {
       return (
@@ -105,7 +124,7 @@ function Location() {
           <br />
           {catalog}
           <div>
-            <Button onClick={getChecklists}>Submit</Button>
+            <Button onClick={checkItemID}>Submit</Button>
           </div>
         </div>
       );
@@ -113,16 +132,25 @@ function Location() {
 
     return (
       <div>
-        <form>
-          <label htmlFor="pass">Pass</label>
-          <input type="text" name="pass"></input><br/><br/>
-          <label htmlFor="fail">Fail</label>
-          <input type="text" name="fail"></input><br/><br/>
-          <label htmlFor="n/a">N/A</label>
-          <input type="text" name="n/a"></input><br/><br/>
-          <Button value="submit">Submit</Button>
+        <form onSubmit={submit}>
+          {checklistItems[Object.keys(checklistItems)[0]].map((i) => {
+            return (
+              <div key={i.index}>
+                {i.name}
+                <input
+                  type="text"
+                  name={i.name}
+                  id={i.id}
+                  ref={(element) => {
+                    refs.current[i.index] = element;
+                  }}
+                ></input>
+              </div>
+            );
+          })}
+          ;<Button>Submit</Button>
         </form>
-        <Button onClick={()=> signOut()}>Sign Out</Button>
+        <Button onClick={() => signOut()}>Sign Out</Button>
       </div>
     );
   }

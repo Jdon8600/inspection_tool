@@ -6,7 +6,7 @@ import SearchInspection from "../../components/InspectionSearch";
 
 function LocationSearchPage() {
   const { data: session, status } = useSession();
-
+  //credits: https://next-auth.js.org/tutorials/refresh-token-rotation
   useEffect(() => {
     if (session?.error === "RefreshAccessTokenError") {
       signIn("procore"); // Force sign in to hopefully resolve error

@@ -6,7 +6,6 @@ function SearchInspection(props) {
 
   function submitHandler(event) {
     event.preventDefault();
-
     const selectedSearch = searchInput.current.value;
     props.onSearch(selectedSearch);
   }
