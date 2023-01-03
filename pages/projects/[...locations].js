@@ -59,18 +59,38 @@ function Location() {
     }
   };
 
-  const submit = (e) => {
+  const submit = async(e) => {
     e.preventDefault();
     for (let i = 0; i < refs.current.length; i++) {
       if (refs.current[i].value != "") {
         updates[refs.current[i].name] = {
-          id: [refs.current[i].id],
+          id: [],
           value: refs.current[i].value,
         };
       }
     }
-    
-    console.log(updates);
+    for (let i = 0; i < Object.keys(checklistItems).length; i++){
+      checklistItems[Object.keys(checklistItems)[i]].map((item)=>{
+        for( let j = 0; j < refs.current.length; j++ ) {
+          if(item.name == refs.current[j].name){
+            if(item.name in updates){
+              let tempArr = [...updates[item.name].id, item.id]
+              updates[item.name].id = tempArr
+            }
+          }
+        }
+      })
+    }
+    const update = await fetch(
+      `/api/updates?project_id=${projectID}`,
+      {
+        method: 'POST',
+        body: JSON.stringify(updates),
+        headers:{"Content-Type": "application/json"}
+      }
+      );
+      const result = await update.json();
+      
   };
 
   const checkItemID = async () => {
