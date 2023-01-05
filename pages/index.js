@@ -13,7 +13,7 @@ export default function Home() {
   if (session) {
     return (
       <div>
-        <p>Welcome {session.user.email}</p>
+        <h1><b>Welcome {session.user.email}</b></h1>
         <Button link="/projects">Projects</Button>
         <Button onClick={() => signOut()}>Log Out</Button>
       </div>

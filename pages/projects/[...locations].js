@@ -59,7 +59,7 @@ function Location() {
     }
   };
 
-  const submit = async(e) => {
+  const submit = async (e) => {
     e.preventDefault();
     for (let i = 0; i < refs.current.length; i++) {
       if (refs.current[i].value != "") {
@@ -69,28 +69,27 @@ function Location() {
         };
       }
     }
-    for (let i = 0; i < Object.keys(checklistItems).length; i++){
-      checklistItems[Object.keys(checklistItems)[i]].map((item)=>{
-        for( let j = 0; j < refs.current.length; j++ ) {
-          if(item.name == refs.current[j].name){
-            if(item.name in updates){
-              let tempArr = [...updates[item.name].id, item.id]
-              updates[item.name].id = tempArr
+    for (let i = 0; i < Object.keys(checklistItems).length; i++) {
+      checklistItems[Object.keys(checklistItems)[i]].map((item) => {
+        for (let j = 0; j < refs.current.length; j++) {
+          if (item.name == refs.current[j].name) {
+            if (item.name in updates) {
+              let tempArr = [...updates[item.name].id, item.id];
+              updates[item.name].id = tempArr;
             }
           }
         }
-      })
+      });
     }
-    const update = await fetch(
-      `/api/updates?project_id=${projectID}`,
-      {
-        method: 'POST',
-        body: JSON.stringify(updates),
-        headers:{"Content-Type": "application/json"}
-      }
-      );
-      const result = await update.json();
-      
+    const update = await fetch(`/api/updates?project_id=${projectID}`, {
+      method: "POST",
+      body: JSON.stringify(updates),
+      headers: { "Content-Type": "application/json" },
+    });
+    const result = await update.json();
+    console.log(result);
+
+    router.push("/fin/");
   };
 
   const checkItemID = async () => {
@@ -168,7 +167,7 @@ function Location() {
               </div>
             );
           })}
-          ;<Button>Submit</Button>
+          <Button>Submit</Button>
         </form>
         <Button onClick={() => signOut()}>Sign Out</Button>
       </div>

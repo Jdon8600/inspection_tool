@@ -11,9 +11,9 @@ function SearchInspection(props) {
   }
   return (
     <form onSubmit={submitHandler}>
-      <div>
-        <label htmlFor="locations">Search By Location</label>
-        <input type="text" id="locations" ref={searchInput} />
+      <div style={{paddingTop: 250}}>
+        <label style={{fontSize: 45}}htmlFor="locations">Search By Location</label>
+        <input style={{width: 250,fontSize:30, marginLeft: 10 }}type="text" id="locations" ref={searchInput} />
         <br />
         <br />
       </div>
