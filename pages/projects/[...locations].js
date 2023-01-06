@@ -3,6 +3,7 @@ import { getSession, useSession, signOut, signIn } from "next-auth/react";
 import React, { useState, useEffect, useRef } from "react";
 import Checkbox from "../../components/Checkbox";
 import Button from "../../components/ui/button";
+import Nav from "../../components/ui/Nav";
 
 function Location() {
   const { data: session, status } = useSession();
@@ -113,7 +114,7 @@ function Location() {
 
   const catalog = list.map(({ id, name }) => {
     return (
-      <ul key={id}>
+      <ul style={{textAlign: 'left'}}key={id}>
         <Checkbox
           type="checkbox"
           name={name}
@@ -131,7 +132,13 @@ function Location() {
   if (status === "authenticated") {
     if (hasCheckID == false) {
       return (
-        <div>
+        <div >
+          <Nav/>
+          <div style={{textAlign: 'left'}}>
+            <h1>Select the Inpection Sheets you would like to update</h1>
+          </div>
+        
+        <div style={{textAlign: 'left'}}>
           <Checkbox
             type="checkbox"
             name="selectAll"
@@ -142,28 +149,34 @@ function Location() {
           Select All
           <br />
           {catalog}
-          <div>
+          <div style={{textAlign: 'left', marginTop: 20}}>
             <Button onClick={checkItemID}>Submit</Button>
           </div>
+        </div>
         </div>
       );
     }
 
     return (
-      <div>
+      <>
+      <Nav/>
+      <div style={{textAlign: 'left'}}>
         <form onSubmit={submit}>
           {checklistItems[Object.keys(checklistItems)[0]].map((i) => {
             return (
-              <div key={i.index}>
-                {i.name}
+              <div style={{textAlign: 'left', marginBottom: 10}} key={i.index}>
+                <label style={{padding: 5}} htmlFor={i.name}>{i.name}</label>
+                <span>
                 <input
+                  style={{marginLeft:5}}
                   type="text"
                   name={i.name}
                   id={i.id}
                   ref={(element) => {
                     refs.current[i.index] = element;
                   }}
-                ></input>
+                />
+                </span>
               </div>
             );
           })}
@@ -171,6 +184,7 @@ function Location() {
         </form>
         <Button onClick={() => signOut()}>Sign Out</Button>
       </div>
+      </>
     );
   }
 }

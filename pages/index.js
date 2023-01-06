@@ -1,5 +1,6 @@
 import { Fragment, useEffect } from "react";
 import Button from "../components/ui/button";
+import Nav from "../components/ui/Nav";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
@@ -12,11 +13,14 @@ export default function Home() {
   }, [session]);
   if (session) {
     return (
+      <>
+      <Nav/>
       <div>
         <h1><b>Welcome {session.user.email}</b></h1>
         <Button link="/projects">Projects</Button>
         <Button onClick={() => signOut()}>Log Out</Button>
       </div>
+      </>
     );
   } else {
     return (
@@ -28,7 +32,6 @@ export default function Home() {
             This website is designed to perform BULK updates on Procore
             Inspection sheets
           </p>
-          <p>Please log in</p>
           <Button onClick={() => signIn("procore")}>SignIn with Procore</Button>
         </div>
       </Fragment>
