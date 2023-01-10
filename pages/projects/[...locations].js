@@ -164,7 +164,7 @@ function Location() {
       <div>
         <h2>How To Make Updates?</h2>
         <p>
-          To make updates corrisponding to Procore's "Pass", "Fail", "N/A" structure, please enter 
+          To make updates corresponding to Procore's "Pass", "Fail", "N/A" structure, please enter 
           <b>"conforming"</b> to pass an inspection, 
           <b>"non_conforming"</b> to fail an inspection, and <b>"not_applicable"</b> for inspections that are N/A.
         </p>
