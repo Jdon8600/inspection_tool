@@ -193,7 +193,9 @@ function Location() {
       <div>
         <h2>How To Make Updates?</h2>
         <p>
-          To make updates corrisponding to Procore's "Pass", "Fail", "N/A" structure, please enter { copied ? alert("Copied!") : <a onClick={copyConform}><b>"conforming"</b></a> } to pass an inspection, { copied1 ? alert("Copied!") : <a onClick={copyNonConform}><b>"non_conforming"</b></a> } to fail an inspection, and { copied2 ? alert("Copied!") : <a onClick={copyNotApp}><b>"not_applicable"</b></a> } for inspections that are N/A.
+          To make updates corrisponding to Procore's "Pass", "Fail", "N/A" structure, please enter 
+          <b>"conforming"</b> to pass an inspection, 
+          <b>"non_conforming"</b> to fail an inspection, and <b>"not_applicable"</b> for inspections that are N/A.
         </p>
         <p>
           <b>NOTE</b>: *If you do not want to type these values, you can simply copy the desired value by clicking the text in bold above and pasting it to the desired text box*
