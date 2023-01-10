@@ -14,12 +14,20 @@ export default function Home() {
   if (session) {
     return (
       <>
-      <Nav/>
-      <div>
-        <h1><b>Welcome {session.user.email}</b></h1>
-        <Button link="/projects">Projects</Button>
-        <Button onClick={() => signOut()}>Log Out</Button>
-      </div>
+        <Nav />
+        <div>
+          <h1>
+            <b>Welcome {session.user.email}</b>
+          </h1>
+          <p>
+            This website is designed to perform <b>BULK</b> updates on Procore
+            Inspection sheets. 
+          </p>
+          <p>
+            
+          </p>
+          <Button link="/projects">Projects</Button>
+        </div>
       </>
     );
   } else {
@@ -28,10 +36,7 @@ export default function Home() {
         <title>Home Page</title>
         <div>
           <h1>Welcome to Procore Inspections Updater</h1>
-          <p>
-            This website is designed to perform BULK updates on Procore
-            Inspection sheets
-          </p>
+
           <Button onClick={() => signIn("procore")}>SignIn with Procore</Button>
         </div>
       </Fragment>

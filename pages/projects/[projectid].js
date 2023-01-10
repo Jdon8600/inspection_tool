@@ -24,7 +24,6 @@ function LocationSearchPage() {
       <Fragment>
         <Nav/>
         <SearchInspection onSearch={findLocationHandler} />
-        <Button onClick={() => signOut()}>Sign Out</Button>
       </Fragment>
     );
   }

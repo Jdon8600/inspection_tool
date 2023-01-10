@@ -30,7 +30,6 @@ function AllProjects() {
       <div>
         <Projects session={session} project={projectItems} />
         <br />
-        <Button onClick={() => signOut()}>Log Out</Button>
       </div>
       </>
     );
