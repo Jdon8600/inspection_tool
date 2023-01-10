@@ -10,10 +10,10 @@ function Nav() {
             Inspection Updating Tool
         </li>
       <li className={classes.navItems}>
-        <Link  href="/" className={classes.a}>Home</Link>
+        <Link  href="/" className={classes.navItems.a}>Home</Link>
       </li>
       <li className={classes.navItems}>
-        <Link  href="/projects" className={classes.a}>Project</Link>
+        <Link  href="/projects" className={classes.navItems.a}>Project</Link>
       </li>
       <button className={classes.btn} onClick={()=>signOut()}>Logout</button>
     </ul>
