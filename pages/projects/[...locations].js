@@ -70,7 +70,7 @@ function Location() {
       .then((data) => {
         setList(data);
       });
-  }, []);
+  }, );
 
   //Handles the selection of all checkboxes
   const handleSelectAll = (e) => {
