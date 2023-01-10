@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { getSession, useSession, signOut, signIn } from "next-auth/react";
 import React, { useState, useEffect, useRef } from "react";
-import useCopy from "use-copy";
 import Checkbox from "../../components/Checkbox";
 import Button from "../../components/ui/button";
 import Nav from "../../components/ui/Nav";
@@ -31,34 +30,6 @@ function Location() {
   const [checklistItems, setChecklistItems] = useState([]);
   const updates = {};
 
-  //use hook to create copiable text
-  const [copied, copy, setCopied] = useCopy("conforming");
-
-   const copyConform = () => {
-     copy();
-
-     setTimeout(() => {
-       setCopied(false);
-     }, 1000);
-   };
-   const [copied1, copy1, setCopied1] = useCopy("non_conforming");
-
-   const copyNonConform = () => {
-     copy1();
-
-     setTimeout(() => {
-       setCopied1(false);
-     }, 1000);
-   };
-   const [copied2, copy2, setCopied2] = useCopy("not_applicable");
-
-   const copyNotApp = () => {
-     copy2();
-
-     setTimeout(() => {
-       setCopied2(false);
-     }, 1000);
-   };
 
   //Create ref for input fields
   const refs = useRef([]);
@@ -198,7 +169,8 @@ function Location() {
           <b>"non_conforming"</b> to fail an inspection, and <b>"not_applicable"</b> for inspections that are N/A.
         </p>
         <p>
-          <b>NOTE</b>: *If you do not want to type these values, you can simply copy the desired value by clicking the text in bold above and pasting it to the desired text box*
+          <b>NOTE</b>: *If you do not want to type these values, you can simply copy the desired value
+           in bold above and paste it to the desired text box*
         </p>
       </div>
       <div style={{textAlign: 'left'}}>
