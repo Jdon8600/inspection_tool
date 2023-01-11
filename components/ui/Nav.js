@@ -8,21 +8,12 @@ function Nav() {
       <ul className={classes.nav}>
         <li className={classes.navItems}>Inspection Updating Tool</li>
         <li className={classes.navItems}>
-          <Link href="/" className={classes.navItems.a}>
+          <Link href="/" className={classes.a}>
             Home
           </Link>
         </li>
         <li className={classes.navItems}>
-          <Link
-            href="/projects"
-            style={{
-              display: "block",
-              color: "white",
-              textAlign: "center",
-              textDecoration: "none",
-              paddingBottom: 16,
-            }}
-          >
+          <Link href="/projects" className={classes.a}>
             Project
           </Link>
         </li>
