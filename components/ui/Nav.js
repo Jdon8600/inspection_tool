@@ -16,10 +16,10 @@ function Nav() {
           <Link
             href="/projects"
             style={{
-              display: block,
-              color: white,
-              textAlign: center,
-              textDecoration: none,
+              display: "block",
+              color: "white",
+              textAlign: "center",
+              textDecoration: "none",
               paddingBottom: 16,
             }}
           >
