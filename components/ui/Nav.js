@@ -1,20 +1,28 @@
 import classes from "./nav.module.css";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import styled from "styled-components";
 
+const NavLink = styled.a`
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding-bottom: 16px;
+`
 function Nav() {
   return (
     <div>
       <ul className={classes.nav}>
         <li className={classes.navItems}>Inspection Updating Tool</li>
         <li className={classes.navItems}>
-          <Link href="/" className={classes.a}>
-            Home
+          <Link href="/">
+            <NavLink>Home</NavLink>
           </Link>
         </li>
         <li className={classes.navItems}>
-          <Link href="/projects" className={classes.a}>
-            Project
+          <Link href="/projects">
+          <NavLink>Project</NavLink>
           </Link>
         </li>
         <button className={classes.btn} onClick={() => signOut()}>
