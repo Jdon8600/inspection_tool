@@ -9,6 +9,9 @@ const NavLink = styled.a`
   text-align: center;
   text-decoration: none;
   padding-bottom: 16px;
+  &:hover{
+    background-color: orange !important;
+  }
 `
 function Nav() {
   return (
