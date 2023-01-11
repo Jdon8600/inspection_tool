@@ -132,16 +132,6 @@ function Location() {
 
   if (status === "authenticated") {
     if (hasCheckID == false) {
-      if (catalog.length === 0){
-        return (
-          <div>
-          <Nav/>
-          <div style={{textAlign: 'left'}}>
-            <h1>No locations found! Please go back and check the search criteria</h1>
-          </div>
-          </div>
-        )
-      }else{
       return (
         <div >
           <Nav/>
@@ -166,7 +156,6 @@ function Location() {
         </div>
         </div>
       );
-      }
     }
 
     return (
