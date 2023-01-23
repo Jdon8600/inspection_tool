@@ -1,4 +1,4 @@
-import classes from "./nav.module.css";
+import classes from "./main-header.module.css";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import styled from "styled-components";
