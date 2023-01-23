@@ -2,7 +2,7 @@ import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Button from "../components/ui/button";
-import Nav from "../components/ui/Nav";
+
 
 function Fin() {
   const { data: session, status } = useSession();
@@ -17,7 +17,6 @@ function Fin() {
   if (status === "authenticated") {
     return (
       <>
-      <Nav/>
       <div>
         <h1> Update complete! </h1>
         <br />

@@ -1,9 +1,8 @@
 import { Fragment, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession,signIn, signOut, getSession } from "next-auth/react";
-import Button from "../../components/ui/button";
 import SearchInspection from "../../components/InspectionSearch";
-import Nav from "../../components/ui/Nav";
+
 
 function LocationSearchPage() {
   const { data: session, status } = useSession();
@@ -22,7 +21,6 @@ function LocationSearchPage() {
   if (status == "authenticated") {
     return (
       <Fragment>
-        <Nav/>
         <SearchInspection onSearch={findLocationHandler} />
       </Fragment>
     );

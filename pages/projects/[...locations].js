@@ -3,7 +3,7 @@ import { getSession, useSession, signOut, signIn } from "next-auth/react";
 import React, { useState, useEffect, useRef } from "react";
 import Checkbox from "../../components/Checkbox";
 import Button from "../../components/ui/button";
-import Nav from "../../components/ui/Nav";
+
 
 function Location() {
   const { data: session, status } = useSession();
@@ -132,9 +132,17 @@ function Location() {
 
   if (status === "authenticated") {
     if (hasCheckID == false) {
+      if(!catalog){
+        return(
+          <div>
+            <div className="center">
+              <p>Loading...</p>
+            </div>
+          </div>
+        )
+      }else{
       return (
         <div >
-          <Nav/>
           <div style={{textAlign: 'left'}}>
             <h1>Select the Inpection Sheets you would like to update</h1>
           </div>
@@ -156,11 +164,11 @@ function Location() {
         </div>
         </div>
       );
+      }
     }
 
     return (
       <>
-      <Nav/>
       <div>
         <h2>How To Make Updates?</h2>
         <p>

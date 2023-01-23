@@ -1,9 +1,8 @@
 import Projects from "../../components/project";
 import { useSession,signIn, signOut, getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import Button from "../../components/ui/button";
-import Nav from "../../components/ui/Nav";
+
+
 
 function AllProjects() {
   const { data: session, status } = useSession();
@@ -26,7 +25,6 @@ function AllProjects() {
   if (status === "authenticated") {
     return (
       <>
-      <Nav/>
       <div>
         <Projects session={session} project={projectItems} />
         <br />
