@@ -132,7 +132,7 @@ function Location() {
 
   if (status === "authenticated") {
     if (hasCheckID == false) {
-      if(!catalog){
+      if(!list){
         return(
           <div>
             <div className="center">
