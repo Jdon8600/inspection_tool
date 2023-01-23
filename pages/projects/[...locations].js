@@ -132,7 +132,7 @@ function Location() {
 
   if (status === "authenticated") {
     if (hasCheckID == false) {
-      if(!list){
+      if(catalog.length === 0) {
         return(
           <div>
             <div className="center">
@@ -140,7 +140,7 @@ function Location() {
             </div>
           </div>
         )
-      }else{
+      }
       return (
         <div >
           <div style={{textAlign: 'left'}}>
@@ -164,7 +164,6 @@ function Location() {
         </div>
         </div>
       );
-      }
     }
 
     return (
