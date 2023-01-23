@@ -23,6 +23,13 @@ function AllProjects() {
       });
   }, []);
   if (status === "authenticated") {
+    if(!projectItems){
+      return(
+        <div className="center">
+          <p>Loading...</p>
+        </div>
+      )
+    }
     return (
       <>
       <div>
