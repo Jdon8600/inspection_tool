@@ -1,0 +1,38 @@
+.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  .navItems {
+    padding-top: 14px;
+    padding-right: 14px;
+    padding-left: 5px;
+    float: left;
+    color: orange;
+  }
+  
+  .btn{
+      float: right;
+      text-decoration: none;
+      cursor: pointer;
+      font: inherit;
+      background-color: #e67417;
+      border: 1px solid #e67417;
+      border-radius: 6px;
+      color: #dafff7;
+      padding: 14px 16px;
+      text-align: center;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  }
+  .btn:hover,
+    .btn:active {
+      background-color: #f8811f;
+      border-color: #f8811f;
+    }
+  .a:hover {
+    background-color: #111;
+  }
+  

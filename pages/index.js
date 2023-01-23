@@ -14,7 +14,6 @@ export default function Home() {
   if (session) {
     return (
       <>
-       
         <div>
           <h1>
             <b>Welcome {session.user.email}</b>
