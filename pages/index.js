@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from "react";
 import Button from "../components/ui/button";
-import Nav from "../components/ui/Nav";
+
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
   if (session) {
     return (
       <>
-        <Nav />
+       
         <div>
           <h1>
             <b>Welcome {session.user.email}</b>
