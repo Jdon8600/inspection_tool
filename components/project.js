@@ -1,6 +1,13 @@
 import Link from "next/link";
 
 function Projects(props) {
+  if(props.project.length === 0){
+    return(
+      <div className="center">
+        <p>Loading...</p>
+      </div>
+    )
+  }
   return (
     <div>
       <h1>Welcome {props.session.user.email}</h1>
