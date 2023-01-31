@@ -10,7 +10,7 @@ export default async (req, res) => {
   if (accessToken) {
     // Signed in
     
-    const url = "https://api.procore.com/rest/v1.1/projects?company_id=10469";
+    const url = "https://api.procore.com/rest/v1.1/projects?company_id=10469$filters[by_status]=Active";
     const response  = await fetch(url, {
       method: "GET",
       headers: { Authorization: "Bearer " + accessToken },
