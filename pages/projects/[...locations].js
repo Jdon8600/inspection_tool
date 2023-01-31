@@ -64,7 +64,7 @@ function Location() {
   const submit = async (e) => {
     e.preventDefault();
     for (let i = 0; i < refs.current.length; i++) {
-      if (refs.current[i].value != "") {
+      if (refs.current[i].value != "default") {
         updates[refs.current[i].name] = {
           id: [],
           value: refs.current[i].value,
@@ -187,15 +187,19 @@ function Location() {
               <div style={{textAlign: 'left', marginBottom: 10}} key={i.index}>
                 <label style={{padding: 5}} htmlFor={i.name}>{i.name}</label>
                 <span>
-                <input
+                <select
                   style={{marginLeft:5}}
-                  type="text"
                   name={i.name}
                   id={i.id}
                   ref={(element) => {
                     refs.current[i.index] = element;
                   }}
-                />
+                >
+                  <option value="default" selected disabled hidden>--Select value--</option>
+                  <option value="conforming">Pass</option>
+                  <option value="non_conforming">Fail</option>
+                  <option value="not_applicable">N/A</option>
+                  </select>
                 </span>
               </div>
             );
