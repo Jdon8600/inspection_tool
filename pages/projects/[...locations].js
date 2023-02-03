@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { getSession, useSession, signOut, signIn } from "next-auth/react";
 import React, { useState, useEffect, useRef } from "react";
-import Checkbox from "../../components/Checkbox";
+import Select from "../../components/ui/select";
 import Button from "../../components/ui/button";
-
+import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 
 function Location() {
   const { data: session, status } = useSession();
@@ -30,7 +30,6 @@ function Location() {
   const [checklistItems, setChecklistItems] = useState([]);
   const updates = {};
 
-
   //Create ref for input fields
   const refs = useRef([]);
 
@@ -41,7 +40,7 @@ function Location() {
       .then((data) => {
         setList(data);
       });
-  }, );
+  });
 
   //Handles the selection of all checkboxes
   const handleSelectAll = (e) => {
@@ -113,100 +112,74 @@ function Location() {
     setChecklistItems(result);
   };
 
-  const catalog = list.map(({ id, name }) => {
-    return (
-      <ul style={{textAlign: 'left'}}key={id}>
-        <Checkbox
-          type="checkbox"
-          name={name}
-          id={id}
-          handleClick={handleClick}
-          isChecked={isCheck.includes(id)}
-        />
-        {name}
-
-        <br />
-      </ul>
-    );
-  });
-
   if (status === "authenticated") {
     if (hasCheckID == false) {
-      if(catalog.length === 0) {
-        return(
+      if (list.length === 0) {
+        return (
           <div>
             <div className="center">
               <p>Loading...</p>
             </div>
           </div>
-        )
+        );
       }
       return (
-        <div >
-          <div style={{textAlign: 'left'}}>
+        <div>
+          <div className="container">
             <h1>Select the Inpection Sheets you would like to update</h1>
+            <Select handleSelectAll={handleSelectAll} isCheckAll={isCheckAll} list={list} handleClick={handleClick} isCheck={isCheck}/>
+                <div style={{ textAlign: "left", marginTop: 20 }}>
+                  <Button onClick={checkItemID}>Submit</Button>
+                </div>
           </div>
-        
-        <div style={{textAlign: 'left'}}>
-          <Checkbox
-            type="checkbox"
-            name="selectAll"
-            id="selectAll"
-            handleClick={handleSelectAll}
-            isChecked={isCheckAll}
-          />
-          Select All
-          <br />
-          {catalog}
-          <div style={{textAlign: 'left', marginTop: 20}}>
-            <Button onClick={checkItemID}>Submit</Button>
-          </div>
-        </div>
         </div>
       );
     }
 
     return (
       <>
-      <div>
-        <h2>How To Make Updates?</h2>
-        <p>
-          To make updates corresponding to Procore's "Pass", "Fail", "N/A" structure, please enter 
-          <b>"conforming"</b> to pass an inspection, 
-          <b>"non_conforming"</b> to fail an inspection, and <b>"not_applicable"</b> for inspections that are N/A.
-        </p>
-        <p>
-          <b>NOTE</b>: *If you do not want to type these values, you can simply copy the desired value
-           in bold above and paste it to the desired text box*
-        </p>
-      </div>
-      <div style={{textAlign: 'left'}}>
-        <form onSubmit={submit}>
-          {checklistItems[Object.keys(checklistItems)[0]].map((i) => {
-            return (
-              <div style={{textAlign: 'left', marginBottom: 10}} key={i.index}>
-                <label style={{padding: 5}} htmlFor={i.name}>{i.name}</label>
-                <span>
-                <select
-                  style={{marginLeft:5}}
-                  name={i.name}
-                  id={i.id}
-                  ref={(element) => {
-                    refs.current[i.index] = element;
-                  }}
+        <div>
+          <h2>How To Make Updates?</h2>
+          <p>
+            To make updates corresponding to Procore's "Pass", "Fail", "N/A"
+            structure, please select the appropriate "Pass", "Fail", or "N/A"
+            options in the dropdown next to each item.
+          </p>
+        </div>
+        <div style={{ textAlign: "left" }}>
+          <form onSubmit={submit}>
+            {checklistItems[Object.keys(checklistItems)[0]].map((i) => {
+              return (
+                <div
+                  style={{ textAlign: "left", marginBottom: 10 }}
+                  key={i.index}
                 >
-                  <option value="default" selected disabled hidden>--Select value--</option>
-                  <option value="conforming">Pass</option>
-                  <option value="non_conforming">Fail</option>
-                  <option value="not_applicable">N/A</option>
-                  </select>
-                </span>
-              </div>
-            );
-          })}
-          <Button>Submit</Button>
-        </form>
-      </div>
+                  <label style={{ padding: 5 }} htmlFor={i.name}>
+                    {i.name}
+                  </label>
+                  <span>
+                    <select
+                      style={{ marginLeft: 5 }}
+                      name={i.name}
+                      id={i.id}
+                      ref={(element) => {
+                        refs.current[i.index] = element;
+                      }}
+                    >
+                      <option value="default" selected disabled hidden>
+                        --Select value--
+                      </option>
+                      <option value="conforming">Pass</option>
+                      <option value="non_conforming">Fail</option>
+                      <option value="not_applicable">N/A</option>
+                    </select>
+                  </span>
+                </div>
+              );
+            })}
+            <Button>Submit</Button>
+          </form>
+        </div>
       </>
     );
   }
