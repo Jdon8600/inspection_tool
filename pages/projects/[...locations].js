@@ -40,8 +40,8 @@ function Location() {
       .then((data) => {
         setList(data);
       });
-  });
-
+  },[]);
+  console.log(list);
   //Handles the selection of all checkboxes
   const handleSelectAll = (e) => {
     setIsCheckAll(!isCheckAll);

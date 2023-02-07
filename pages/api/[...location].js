@@ -22,15 +22,31 @@ export default async (req, res) => {
 
     const result = await response.json();
 
-    
-    const filteredData = [];
+    const locationFiltered = [];
+   
+    const loc_id = [];
     for(let i in result) {
-        filteredData.push({
-          id: result[i].id,
-          name: result[i].node_name,
-        });
+        loc_id.push(result[i].id);
     }
-    res.status(200).json(filteredData);
+
+   
+
+    const checklistURL = `https://api.procore.com/rest/v1.0/projects/${projectID}/checklist/lists?company_id=10469&filters[location_id]=[${loc_id}]`
+    const getFilteredLists = await fetch(checklistURL,{
+      method: "GET",
+      headers: { Authorization: "Bearer " + accessToken },
+    });
+    const checklistRes = await getFilteredLists.json();
+
+    for(let i in checklistRes) {
+      locationFiltered.push({
+        id: checklistRes[i]['location'].id,
+        name: checklistRes[i]['location'].node_name,
+      });
+  }
+
+    
+    res.status(200).json(locationFiltered);
   } else {
     // Not Signed in
     res.status(401);
